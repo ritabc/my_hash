@@ -36,5 +36,16 @@ describe(MyHash) do
       new_hash.myStore("moose", "smelly")
       expect(new_hash.myFetch("cat")).to(eq(nil))
     end
+    it("takes two hashes and merges them together") do
+      animal_hash = MyHash.new()
+      plant_hash = MyHash.new()
+      animal_hash.myStore("bat", "brown")
+      animal_hash.myStore("dog", "furry")
+      animal_hash.myStore("moose", "smelly")
+      plant_hash.myStore("fern", "fiddlehead")
+      plant_hash.myStore("tree", "tall")
+      animal_hash.myMerge(plant_hash)
+      expect(animal_hash.myFetch("tree")).to(eq("tall"))
+    end
   end
 end

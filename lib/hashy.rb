@@ -5,6 +5,14 @@ class MyHash
     @value = []
   end
 
+  def read_key
+    @key
+  end
+
+  def read_value
+    @value
+  end
+
   def myStore(key_to_store, value_to_store)
     if @key.include?(key_to_store)
       temp = @key.index(key_to_store)
@@ -23,5 +31,19 @@ class MyHash
     else
       nil
     end
+  end
+
+  def myMerge(second_hash)
+    second_hash.read_key.each do |key|
+      if self.read_key.include?(key)
+        temp = @key.index(key)
+        @value[temp] = second_hash.read_value[temp]
+      else
+        @key.push(key)
+        temp_i = second_hash.read_key.index(key)
+        @value.push(second_hash.read_value[temp_i])
+      end
+    end
+    self
   end
 end
